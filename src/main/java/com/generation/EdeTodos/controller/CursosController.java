@@ -1,6 +1,7 @@
 package com.generation.EdeTodos.controller;
 
 import com.generation.EdeTodos.model.Cursos;
+import com.generation.EdeTodos.repository.CategoriaRepository;
 import com.generation.EdeTodos.repository.CursosRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class CursosController {
     @Autowired
     private CursosRepository cursosRepository;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
     @GetMapping
     public ResponseEntity<List<Cursos>> getAll(){
         return ResponseEntity.ok(cursosRepository.findAll());
@@ -32,7 +36,7 @@ public class CursosController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @GetMapping("/nome/{nome_curso}")
+    @GetMapping("/nome/{nomecurso}")
     public ResponseEntity<List<Cursos>> getByNomecurso(@PathVariable String nomecurso){
         return ResponseEntity.ok(cursosRepository.findAllByNomecursoContainingIgnoreCase(nomecurso));
     }
@@ -44,16 +48,21 @@ public class CursosController {
 
     @PostMapping
     public ResponseEntity<Cursos> post(@Valid @RequestBody Cursos cursos){
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(cursosRepository.save(cursos));
+        if (categoriaRepository.existsById(cursos.getCategoria().getId()))
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(cursosRepository.save(cursos));
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não Existe", null);
     }
 
     @PutMapping
     public ResponseEntity<Cursos> put(@Valid @RequestBody Cursos cursos){
-        return cursosRepository.findById(cursos.getId())
-                .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-                        .body(cursosRepository.save(cursos)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        if (cursosRepository.existsById(cursos.getId())){
+            if (categoriaRepository.existsById(cursos.getCategoria().getId()))
+                return ResponseEntity.status(HttpStatus.CREATED)
+                        .body(cursosRepository.save(cursos));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não Existe", null);
+        }
+        return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

@@ -2,11 +2,8 @@ package com.generation.EdeTodos.model;
 
 import java.sql.Time;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -27,7 +24,7 @@ public class Cursos {
 	private float preco;
 	
 	@NotNull
-	private Time duracao;
+	private String duracao;
 	
 	@NotBlank(message= "O atributo instrutor é obrigatório")
 	@Size(min=3, max=35, message = "O atributo instrutor tem no mínimo 3 caracteres e no máximo 35 carateres")
@@ -40,6 +37,10 @@ public class Cursos {
 	private String avaliacao;
 	
 	private String foto;
+
+	@ManyToOne
+	@JsonIgnoreProperties("cursos")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -65,11 +66,11 @@ public class Cursos {
 		this.preco = preco;
 	}
 
-	public Time getDuracao() {
+	public String getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(Time duracao) {
+	public void setDuracao(String duracao) {
 		this.duracao = duracao;
 	}
 
@@ -112,7 +113,12 @@ public class Cursos {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
-	
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 }
