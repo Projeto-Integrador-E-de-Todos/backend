@@ -21,7 +21,7 @@ public class Cursos {
 	
 	@NotBlank(message="O atributo é obrigatório")
 	@Size(min=5, max=50, message = "O atributo nome do curso tem no mínimo 5 caracteres e no máximo 50 carateres")
-	private String nome_curso;
+	private String nomecurso;
 	
 	@NotNull
 	private float preco;
@@ -35,7 +35,7 @@ public class Cursos {
 	
 	private String descricao;
 	
-	private String pre_requisitos;
+	private String prerequisitos;
 	
 	private String avaliacao;
 	
@@ -49,12 +49,12 @@ public class Cursos {
 		this.id = id;
 	}
 
-	public String getNome_curso() {
-		return nome_curso;
+	public String getNomecurso() {
+		return nomecurso;
 	}
 
-	public void setNome_curso(String nome_curso) {
-		this.nome_curso = nome_curso;
+	public void setNomecurso(String nomecurso) {
+		this.nomecurso = nomecurso;
 	}
 
 	public float getPreco() {
@@ -89,12 +89,12 @@ public class Cursos {
 		this.descricao = descricao;
 	}
 
-	public String getPre_requisitos() {
-		return pre_requisitos;
+	public String getPrerequisitos() {
+		return prerequisitos;
 	}
 
-	public void setPre_requisitos(String pre_requisitos) {
-		this.pre_requisitos = pre_requisitos;
+	public void setPrerequisitos(String prerequisitos) {
+		this.prerequisitos = prerequisitos;
 	}
 
 	public String getAvaliacao() {
