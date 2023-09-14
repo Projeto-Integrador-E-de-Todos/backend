@@ -1,12 +1,11 @@
 package com.generation.EdeTodos.model;
 
 import java.sql.Date;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,7 +23,7 @@ public class Usuario {
 	private String nome;
 	
 	@NotBlank(message = "Insira login de usuario")
-	@Size(min = 6, max = 45, message = "no minimo 2 caracteres e no maximo 45")
+	@Email(message = "O atributo usuario tem que receber um e-mail válido")
 	private String login;
 	
 	@NotBlank(message = "Insira sua senha de usuario")
@@ -37,7 +36,11 @@ public class Usuario {
 	@NotBlank(message = "Insira o endereço URL da foto")
 	@Size(min = 10, max = 45, message = "no minimo 10 caracteres e no maximo 45")
 	private String foto;
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Cursos> cursos;
+
 	public Long getId() {
 		return id;
 	}
@@ -86,7 +89,11 @@ public class Usuario {
 		this.foto = foto;
 	}
 
-	
-	
+	public List<Cursos> getCursos() {
+		return cursos;
+	}
 
+	public void setCursos(List<Cursos> cursos) {
+		this.cursos = cursos;
+	}
 }

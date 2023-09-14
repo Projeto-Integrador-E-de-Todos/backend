@@ -42,6 +42,11 @@ public class Cursos {
 	@JsonIgnoreProperties("cursos")
 	private Categoria categoria;
 
+	@ManyToOne
+	@JsonIgnoreProperties("cursos")
+	private Usuario usuario;
+
+
 	public Long getId() {
 		return id;
 	}
@@ -120,5 +125,13 @@ public class Cursos {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }
