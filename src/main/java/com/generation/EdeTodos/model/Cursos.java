@@ -29,6 +29,8 @@ public class Cursos {
 	@NotBlank(message= "O atributo instrutor é obrigatório")
 	@Size(min=3, max=35, message = "O atributo instrutor tem no mínimo 3 caracteres e no máximo 35 carateres")
 	private String instrutor;
+
+	private String aulas;
 	
 	private String descricao;
 	
@@ -121,6 +123,14 @@ public class Cursos {
 
 	public Categoria getCategoria() {
 		return categoria;
+	}
+
+	public String getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(String aulas) {
+		this.aulas = aulas;
 	}
 
 	public void setCategoria(Categoria categoria) {

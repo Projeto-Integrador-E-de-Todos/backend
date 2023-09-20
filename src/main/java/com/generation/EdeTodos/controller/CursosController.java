@@ -73,8 +73,6 @@ public class CursosController {
         if (cursos.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         cursosRepository.deleteById(id);
-
-
     }
 
 }
