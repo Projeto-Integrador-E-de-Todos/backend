@@ -3,7 +3,9 @@ package com.generation.EdeTodos.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,22 +21,24 @@ public class Usuario {
 	private Long id;
 	
 	@NotBlank(message = "Insira seu nome de usuario")
-	@Size(min = 2, max = 50, message = "no minimo 2 caracteres e no maximo 50")
+	@Size(min = 2, message = "no minimo 2 caracteres ")
 	private String nome;
-	
+
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "Insira login de usuario")
 	@Email(message = "O atributo usuario tem que receber um e-mail válido")
 	private String login;
 	
 	@NotBlank(message = "Insira sua senha de usuario")
-	@Size(min = 2, max = 45, message = "no minimo 2 caracteres e no maximo 45")
+	@Size(min = 8, message = "no minimo 8 caracteres")
 	private String senha;
-	
+
+	@JsonFormat(pattern = "dd.MM.yyyy")
 	@NotNull(message = "Insira sua data de nascimento")
 	private Date data_nas;
 
 	@NotBlank(message = "Insira o endereço URL da foto")
-	@Size(min = 10, max = 45, message = "no minimo 10 caracteres e no maximo 45")
+	@Size(min = 10, message = "no minimo 10 caracteres")
 	private String foto;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
