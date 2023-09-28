@@ -2,7 +2,6 @@ package com.generation.EdeTodos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Fetch;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

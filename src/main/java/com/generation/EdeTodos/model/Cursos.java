@@ -1,6 +1,6 @@
 package com.generation.EdeTodos.model;
 
-import java.sql.Time;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -30,13 +30,15 @@ public class Cursos {
 	@Size(min=3, max=35, message = "O atributo instrutor tem no mínimo 3 caracteres e no máximo 35 carateres")
 	private String instrutor;
 
-	private String aulas;
+	private List<String> aulas;
+	
+	private List<String> nomeAulas;
 	
 	private String descricao;
 	
 	private String prerequisitos;
 	
-	private String avaliacao;
+	private List<String> avaliacao;
 	
 	private String foto;
 
@@ -105,11 +107,11 @@ public class Cursos {
 		this.prerequisitos = prerequisitos;
 	}
 
-	public String getAvaliacao() {
+	public List<String> getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(String avaliacao) {
+	public void setAvaliacao(List<String> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 
@@ -125,14 +127,6 @@ public class Cursos {
 		return categoria;
 	}
 
-	public String getAulas() {
-		return aulas;
-	}
-
-	public void setAulas(String aulas) {
-		this.aulas = aulas;
-	}
-
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
@@ -144,4 +138,21 @@ public class Cursos {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public List<String> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(List<String> aulas) {
+		this.aulas = aulas;
+	}
+
+	public List<String> getNomeAulas() {
+		return nomeAulas;
+	}
+
+	public void setNomeAulas(List<String> nomeAulas) {
+		this.nomeAulas = nomeAulas;
+	}
+
 }
