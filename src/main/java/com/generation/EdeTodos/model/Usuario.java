@@ -1,6 +1,7 @@
 package com.generation.EdeTodos.model;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,8 +35,7 @@ public class Usuario {
 	private String senha;
 
 	@JsonFormat(pattern = "dd.MM.yyyy")
-	@NotNull(message = "Insira sua data de nascimento")
-	private Date data_nas;
+	private LocalDate data_nas;
 
 	@NotBlank(message = "Insira o endereço URL da foto")
 	@Size(min = 10, message = "no minimo 10 caracteres")
@@ -77,11 +77,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Date getData_nas() {
+	public LocalDate getData_nas() {
 		return data_nas;
 	}
 
-	public void setData_nas(Date data_nas) {
+	public void setData_nas(LocalDate data_nas) {
 		this.data_nas = data_nas;
 	}
 
