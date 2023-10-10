@@ -34,6 +34,7 @@ public class Usuario {
 	@Size(min = 8, message = "no minimo 8 caracteres")
 	private String senha;
 
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate data_nas;
 
 	@NotBlank(message = "Insira o endereço URL da foto")
