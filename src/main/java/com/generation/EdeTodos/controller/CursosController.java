@@ -65,13 +65,14 @@ public class CursosController {
         return  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         Optional<Cursos> cursos = cursosRepository.findById(id);
 
-        if (cursos.isEmpty())
+        if (cursos.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         cursosRepository.deleteById(id);
     }
 
